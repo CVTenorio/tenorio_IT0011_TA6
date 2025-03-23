@@ -33,8 +33,7 @@ class ItemManager:
                     try: 
                         max_id_int = 0
                         for id_str in existing_ids:
-                            max_id_int = max(max_id_int)
-                        
+                            max_id_int = max(max_id_int, int(id_str))
                         next_id_int = max_id_int + 1
                     except ValueError:
                         raise ValueError("Existing IDs must be valid integers convertible to string.")
@@ -42,6 +41,7 @@ class ItemManager:
             unique_id = generate_unique_id_internal(self.existing_ids)
             self.existing_ids.append(unique_id)
             return unique_id
+        
     def add_item(self, name, description, price):
             try:
                 item_id = self.generate_unique_id()
@@ -66,8 +66,8 @@ class ItemManager:
                     if description: 
                         if not description:
                             raise ValueError("Description cannot be empty.")
+                        item.description = description
                     if price:
-                        if not price:
                             if not isinstance(price, (int, float)) or price <= 0:
                                     raise ValueError("Price must be a positive number.")
                             item.price = price
@@ -78,6 +78,7 @@ class ItemManager:
                 print("Available Item IDs:") 
                 for item_key in self.items.keys():
                     print(item_key)
+                    
     def delete_item(self, item_id):
             if item_id in self.items:
                 del self.items[item_id]
@@ -95,7 +96,7 @@ class ItemManager:
                     if not isinstance(new_price, (int, float)) or new_price <=0:
                         raise ValueError("Price must be a positive number.")
                     item.price = new_price
-                    print(f"Error: Item ID {item_id} updated to ${new_price:.2f}")
+                    print(f"Error: Price of Item ID {item_id} updated to ${new_price:.2f}")
                 except ValueError as e:
                     print(f"Error updating price: {e}")
             else:
@@ -106,7 +107,7 @@ class ItemManager:
                 return False 
             return True
         
-    def get_item_input():
+def get_item_input():
             name = input ("Enter item name: ")
             description = input("Enter item description: ")
             while True:

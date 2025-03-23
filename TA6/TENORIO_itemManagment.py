@@ -51,5 +51,47 @@ class ItemManager:
             except ValueError as e:
                 print(f"Error adding item: {e}")
                 return None
-        def get_item
-            
+        def get_item(self, item_id):
+            return self.items.get(item_id)
+        def update_item(self, item_id, name=None, description=None, price=None):
+            item = self.get_item(item_id)
+            if item:
+                try:
+                    if name:
+                        if not name:
+                            raise ValueError("Name cannot be empty.")
+                        item.name = name
+                    if description: 
+                        if not description:
+                            raise ValueError("Description cannot be empty.")
+                    if price:
+                        if not price:
+                            if not isinstance(price, (int, float)) or price <= 0:
+                                    raise ValueError("Price must be a positive number.")
+                            item.price = price
+                except ValueError as e:
+                    print(f"Error updating item: {e}")
+            else:
+                print(f"Error: Item ID '{item_id}' not found. Please enter a valid ID from the list.")
+                print("Available Item IDs:") 
+                for item_key in self.items.keys():
+                    print(item_key)
+        def delete_item(self, item_id):
+            if item_id in self.items:
+                del self.items[item_id]
+                if item_id in self.existing_ids:
+                    self.existing_ids.remove(item_id)
+        
+        def list_items(self): 
+            for item in self.items.values():
+                print(item)
+        
+        def update_price_by_id(self, item_id, new_price):
+            item = self.get_item(item_id)
+            if item:
+                try:
+                    if not isinstance(new_price, (int, float)) or new_price <=0
+                        raise ValueError("Price must be a positive number.")
+                    item.price = new_price
+                    print(f"Error: Item ID '{item_id}'")
+                except          

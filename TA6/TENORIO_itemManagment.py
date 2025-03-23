@@ -124,7 +124,7 @@ def get_item_input():
 if __name__ == "__main__":
     manager = ItemManager()
     while True:
-        print("\nOptions:")
+        print("\nOptions")
         print("1. Add Item")
         print("2. List Items")
         print("3. Update")

@@ -37,12 +37,12 @@ class ItemManager:
                         
                         next_id_int = max_id_int + 1
                     except ValueError:
-                    raise ValueError("Existing IDs must be valid integers convertible to string.")
+                        raise ValueError("Existing IDs must be valid integers convertible to string.")
                 return f"{next_id_int:03d}" 
             unique_id = generate_unique_id_internal(self.existing_ids)
             self.existing_ids.append(unique_id)
             return unique_id
-        def add_item(self, name, description, price):
+    def add_item(self, name, description, price):
             try:
                 item_id = self.generate_unique_id()
                 item = Item(name, description, price, item_id)
@@ -51,9 +51,11 @@ class ItemManager:
             except ValueError as e:
                 print(f"Error adding item: {e}")
                 return None
-        def get_item(self, item_id):
+            
+    def get_item(self, item_id):
             return self.items.get(item_id)
-        def update_item(self, item_id, name=None, description=None, price=None):
+        
+    def update_item(self, item_id, name=None, description=None, price=None):
             item = self.get_item(item_id)
             if item:
                 try:
@@ -76,21 +78,21 @@ class ItemManager:
                 print("Available Item IDs:") 
                 for item_key in self.items.keys():
                     print(item_key)
-        def delete_item(self, item_id):
+    def delete_item(self, item_id):
             if item_id in self.items:
                 del self.items[item_id]
                 if item_id in self.existing_ids:
                     self.existing_ids.remove(item_id)
         
-        def list_items(self): 
+    def list_items(self): 
             for item in self.items.values():
                 print(item)
         
-        def update_price_by_id(self, item_id, new_price):
+    def update_price_by_id(self, item_id, new_price):
             item = self.get_item(item_id)
             if item:
                 try:
-                    if not isinstance(new_price, (int, float)) or new_price <=0
+                    if not isinstance(new_price, (int, float)) or new_price <=0:
                         raise ValueError("Price must be a positive number.")
                     item.price = new_price
                     print(f"Error: Item ID {item_id} updated to ${new_price:.2f}")
@@ -103,7 +105,8 @@ class ItemManager:
                     print(item_key)
                 return False 
             return True
-        def get_item_input()
+        
+    def get_item_input():
             name = input ("Enter item name: ")
             description = input("Enter item description: ")
             while True:
@@ -116,8 +119,36 @@ class ItemManager:
                 except ValueError:
                     print("Invalid price. Please enter a number.")
             return name, description, price
+        
 if __name__ == "__main__":
     manager = ItemManager()
     while True:
+        print("\nOptions:")
+        print("1. Add Item")
+        print("2. List Items")
+        print("3. Update")
+        print("4. Exit")
         
-                      
+        choice = input ("Enter your choice: ") 
+        
+        if choice == "1":
+            name, description, price = get_item_input() 
+            manager.add_item(name, description, price)
+        elif choice == "2":
+            while True:
+                item_id = input("Enter item ID to update price: ")
+                while True:
+                    try:
+                        new_price = float(input("Enter new price: "))
+                        if new_price <=0:
+                            print("Price must be a positive number.")
+                        else:
+                            break
+                    except ValueError:
+                        print("Invalid price. Please enter a number.")
+                if manager.update_price_by_id (item_id, new_price):
+                    break 
+        elif choice == "4":
+            break
+        else:
+            print("Invalid choice. Please try again.")             

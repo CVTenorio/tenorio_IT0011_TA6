@@ -111,15 +111,14 @@ def get_item_input():
 if __name__ == "__main__":
     manager = ItemManager()
     while True:
-        print("\nWelcome to Tenorio's Item Management")
-        print("\nOptions")
+        print("\nWelcome to Tenorio's Item Management\n")
         print("1. Add Item")
         print("2. List Items")
         print("3. Update Price")
         print("4. Delete Item")
         print("5. Exit")
         
-        choice = input ("Enter your choice: ") 
+        choice = input ("\nEnter your choice: ") 
         
         if choice == "1":
             name, description, price = get_item_input() 

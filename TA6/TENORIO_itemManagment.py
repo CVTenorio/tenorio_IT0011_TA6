@@ -1,5 +1,5 @@
 #TENORIO CARL VINCENT IT0011 ITEM MANAGEMENT v1.00
-
+#debug and additional changes
 class Item:
     
     def __init__(self, name, description, price, item_id):

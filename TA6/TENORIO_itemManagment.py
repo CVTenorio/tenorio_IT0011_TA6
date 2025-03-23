@@ -136,6 +136,8 @@ if __name__ == "__main__":
             name, description, price = get_item_input() 
             manager.add_item(name, description, price)
         elif choice == "2":
+            manager.list_items()
+        elif choice == "3":
             while True:
                 item_id = input("Enter item ID to update price: ")
                 while True:

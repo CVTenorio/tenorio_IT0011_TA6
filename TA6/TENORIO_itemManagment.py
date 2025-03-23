@@ -1,6 +1,7 @@
 #TENORIO CARL VINCENT IT0011 ITEM MANAGEMENT v1.00
 
 class Item:
+    
     def __init__(self, name, description, price, item_id):
         if not name:
             raise ValueError("Name cannot be empty.")
@@ -13,10 +14,12 @@ class Item:
         self.name = name
         self.description = description
         self.price = price
+        
     def __str__(self):
         return f"ID: {self.id}, \nName: {self.name}, \nDescription: {self.description}, \nPrice: $ {self.price:2f}"
 
 class ItemManager:
+    
     def __init__(self):
         self.items = {}
         self.existing_ids = []

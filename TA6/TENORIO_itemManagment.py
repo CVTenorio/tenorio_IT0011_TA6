@@ -93,5 +93,31 @@ class ItemManager:
                     if not isinstance(new_price, (int, float)) or new_price <=0
                         raise ValueError("Price must be a positive number.")
                     item.price = new_price
-                    print(f"Error: Item ID '{item_id}'")
-                except          
+                    print(f"Error: Item ID {item_id} updated to ${new_price:.2f}")
+                except ValueError as e:
+                    print(f"Error updating price: {e}")
+            else:
+                print(f"Error: Item ID '{item_id}' not found. Please enter a valid ID from the list.")
+                print("Available Item IDs: ")
+                for item_key in self.items.keys():
+                    print(item_key)
+                return False 
+            return True
+        def get_item_input()
+            name = input ("Enter item name: ")
+            description = input("Enter item description: ")
+            while True:
+                try:
+                    price = float(input("Enter item price: "))
+                    if price <=0:
+                        print("Price must be a positive number.")
+                    else:
+                        break
+                except ValueError:
+                    print("Invalid price. Please enter a number.")
+            return name, description, price
+if __name__ == "__main__":
+    manager = ItemManager()
+    while True:
+        
+                      
